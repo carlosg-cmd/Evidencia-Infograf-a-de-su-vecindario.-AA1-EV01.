@@ -1,0 +1,583 @@
+<html lang="en" translate="no">
+<head>
+    <meta name="google" content="notranslate">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Neighborhood Infographic — AA1-EV01</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #080b16;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary: #10b981; /* SENA Emerald */
+            --primary-glow: rgba(16, 185, 129, 0.25);
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 960px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* ===== HEADER / PORTADA ===== */
+        header {
+            background: linear-gradient(135deg, #0a0f2d 0%, #151d44 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, var(--primary-glow), transparent 70%);
+            border-radius: 50%;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 40%, #a7f3d0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 24px;
+        }
+
+        .academic-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .info-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            font-size: 0.85rem;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* ===== MAIN SECTION ===== */
+        .infographic-section {
+            display: grid;
+            grid-template-columns: 1.10fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .infographic-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== MAP / PHOTOS CARD ===== */
+        .map-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Isometric / Grid Neighborhood Map */
+        .neighborhood-map {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 10px;
+            background: rgba(255,255,255,0.01);
+            border: 1px dashed rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 14px;
+        }
+
+        .map-node {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 6px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .map-node.active {
+            background: rgba(16, 185, 129, 0.08);
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+        }
+
+        .map-node span {
+            font-size: 1.4rem;
+        }
+
+        .map-road {
+            grid-column: span 3;
+            background: rgba(255,255,255,0.015);
+            border: 1px dashed rgba(255,255,255,0.04);
+            border-radius: 6px;
+            padding: 4px;
+            text-align: center;
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.15);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ===== PHOTO CAROUSEL ===== */
+        .photo-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .gallery-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .image-container {
+            width: 100%;
+            aspect-ratio: 4/3;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            position: relative;
+            background: #000;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .image-container img.active {
+            opacity: 1;
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 12px;
+        }
+
+        .gallery-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-weight: 700;
+            transition: color 0.2s;
+        }
+
+        .gallery-btn:hover {
+            color: var(--primary);
+        }
+
+        .img-caption {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* ===== DESCRIPTION CARD ===== */
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .desc-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .desc-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .desc-body {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .desc-paragraph {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.7;
+        }
+
+        .preposition {
+            color: var(--primary);
+            font-weight: 700;
+            background: rgba(16, 185, 129, 0.12);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        /* ===== REFERENCES REMOVED ===== */
+
+        /* ===== PRINT CONFIGURATION FOR PDF ===== */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+                padding: 10px;
+            }
+
+            .container {
+                max-width: 100%;
+                gap: 15px;
+            }
+
+            header {
+                background: #f3f4f6;
+                border: 1px solid #9ca3af;
+                color: #000;
+                box-shadow: none;
+                padding: 20px;
+            }
+
+            h1 {
+                background: none;
+                -webkit-text-fill-color: initial;
+                color: #000;
+                font-size: 1.8rem;
+            }
+
+            .intro {
+                color: #374151;
+                font-size: 0.85rem;
+                margin-bottom: 12px;
+            }
+
+            .info-value {
+                color: #000;
+            }
+
+            .infographic-section {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .map-card, .desc-card {
+                background: #fff;
+                border: 1px solid #9ca3af;
+                color: #000;
+                box-shadow: none;
+                padding: 16px;
+            }
+
+            .neighborhood-map {
+                border: 1px solid #d1d5db;
+            }
+
+            .map-node {
+                background: #f9fafb;
+                border: 1px solid #d1d5db;
+                color: #000;
+            }
+
+            .map-node.active {
+                background: #e2fbf0;
+                border-color: #10b981;
+            }
+
+            .preposition {
+                color: #047857;
+                background: #ecfdf5;
+                border: 1px solid #a7f3d0;
+            }
+
+            .desc-header {
+                color: #000;
+                border-bottom: 1px solid #d1d5db;
+            }
+
+            .desc-paragraph {
+                color: #111827;
+                font-size: 0.85rem;
+            }
+
+            .gallery-controls, .gallery-label, .gallery-btn {
+                display: none !important;
+            }
+
+            .image-container {
+                max-height: 220px;
+            }
+        }
+    </style>
+</head>
+<body class="notranslate">
+
+<div class="container">
+    <!-- PORTADA ACADÉMICA -->
+    <header>
+        <div class="badge">🌐 Infographic — AA1-EV01</div>
+        <h1>My Neighborhood</h1>
+        <p class="intro">Welcome to my neighborhood! This is a description of my local area in Colombia, focusing on the places near my home and using spatial prepositions to describe their relative locations.</p>
+        
+        <div class="academic-info">
+            <div class="info-item">
+                <span class="info-label">Apprentice</span>
+                <span class="info-value">Carlos Andres Jimenez Murillo</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Course / Program</span>
+                <span class="info-value">English Does Work - Level 2</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Instructor</span>
+                <span class="info-value">Eleen Johnson Silva</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Institution</span>
+                <span class="info-value">SENA</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION GRID -->
+    <div class="infographic-section">
+        
+        <!-- MAP & GALLERY PANEL -->
+        <div class="map-card">
+            <span class="section-title">📍 Neighborhood Structure</span>
+            
+            <div class="neighborhood-map">
+                <!-- Row 1 -->
+                <div class="map-node" id="node-ara">
+                    <span>🛒</span>
+                    Ara Supermarket
+                </div>
+                <div class="map-node" id="node-houses">
+                    <span>🏘️</span>
+                    Other Houses
+                </div>
+                <div class="map-node" id="node-soccer">
+                    <span>⚽</span>
+                    Soccer Field
+                </div>
+
+                <!-- Street Row -->
+                <div class="map-road">Unpaved Street / Rocks & Trees</div>
+
+                <!-- Row 2 -->
+                <div class="map-node" id="node-workshop">
+                    <span>🔧</span>
+                    Moto Workshop
+                </div>
+                <div class="map-node active" id="node-house">
+                    <span>🏠</span>
+                    My House
+                </div>
+                <div class="map-node" id="node-trees">
+                    <span>🌳</span>
+                    Green Trees
+                </div>
+            </div>
+
+            <!-- PHOTOS CAROUSEL -->
+            <div class="photo-gallery">
+                <span class="gallery-label">📸 Photo Gallery (Real References)</span>
+                <div class="image-container">
+                    <img src="images/frente.jpg" alt="Front of my house" class="active" id="slide-0">
+                    <img src="images/cuadra.jpg" alt="My block" id="slide-1">
+                    <img src="images/desde_puerta.jpg" alt="View from front door" id="slide-2">
+                    <img src="images/arboles.jpg" alt="Trees in front of the house" id="slide-3">
+                </div>
+                <div class="gallery-controls">
+                    <button class="gallery-btn" onclick="changeSlide(-1)">◀ Prev</button>
+                    <span class="img-caption" id="caption-text">Front of the house</span>
+                    <button class="gallery-btn" onclick="changeSlide(1)">Next ▶</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DESCRIPTION PANEL -->
+        <div class="info-panel">
+            <div class="desc-card">
+                <div class="desc-header">
+                    <span>🏠 Neighborhood Description</span>
+                    <span style="font-size:0.75rem; font-weight:400; color:var(--primary)">Topic: Where I Live</span>
+                </div>
+                <div class="desc-body">
+                    <p class="desc-paragraph">
+                        Welcome to my neighborhood! This is a quiet and green place where I live. 
+                    </p>
+                    <p class="desc-paragraph">
+                        My home is a two-story house with a gate, located on an unpaved street. There are many green trees <span class="preposition">in front of</span> my house.
+                    </p>
+                    <p class="desc-paragraph">
+                        Several other houses are <span class="preposition">around</span> my block. 
+                    </p>
+                    <p class="desc-paragraph">
+                        The Ara supermarket is <span class="preposition">near</span> my house, about 200 meters away. 
+                    </p>
+                    <p class="desc-paragraph">
+                        There is a motorcycle workshop <span class="preposition">next to</span> the street, five houses away.
+                    </p>
+                    <p class="desc-paragraph">
+                        Also, there is a large soccer field <span class="preposition">behind</span> my house, where children play in the afternoons. I love my neighborhood!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const captions = [
+        "Front of the house (Two-story structure with gate)",
+        "My block (Unpaved street with stones)",
+        "View from the front door (Dirt road path)",
+        "Trees in front of the house (Green nature areas)"
+    ];
+    let currentSlide = 0;
+    const totalSlides = 4;
+
+    function changeSlide(direction) {
+        // Remove active class from current image
+        document.getElementById('slide-' + currentSlide).classList.remove('active');
+        
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        
+        // Add active class to new image
+        document.getElementById('slide-' + currentSlide).classList.add('active');
+        
+        // Update caption
+        document.getElementById('caption-text').innerText = captions[currentSlide];
+
+        // Highlight corresponding map nodes interactively
+        document.querySelectorAll('.map-node').forEach(el => el.classList.remove('active'));
+        if (currentSlide === 0) {
+            document.getElementById('node-house').classList.add('active');
+        } else if (currentSlide === 1) {
+            document.getElementById('node-houses').classList.add('active');
+            document.getElementById('node-workshop').classList.add('active');
+        } else if (currentSlide === 2) {
+            document.getElementById('node-house').classList.add('active');
+        } else if (currentSlide === 3) {
+            document.getElementById('node-trees').classList.add('active');
+        }
+    }
+</script>
+</body>
+</html>
